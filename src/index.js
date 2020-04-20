@@ -3,11 +3,30 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import {createStore, applyMiddleware, compose} from 'redux';
+import logger from 'redux-logger';
+import combinedReducers from './reducers/rootReducer';
+import { Provider } from 'react-redux';
+import createSagaMiddleware from 'redux-saga';
+import rootSage from './sagas/rootSaga';
+
+let sagaMiddleware = createSagaMiddleware();
+let middleware = applyMiddleware(logger, sagaMiddleware);
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(
+    combinedReducers,
+    composeEnhancer(middleware),
+    );
+
+sagaMiddleware.run(rootSage);
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <Provider store = {store}>
+        <React.StrictMode>
+            <App />
+        </React.StrictMode>
+    </Provider>,
   document.getElementById('root')
 );
 

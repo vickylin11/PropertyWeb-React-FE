@@ -1,0 +1,63 @@
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 10vh;
+  background: grey;
+  color: white;
+}
+
+.nav-links {
+  width: 60%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.logo {
+  font-family: fantasy;
+  color: grey;
+  font-size: xx-large;
+  text-align: center;
+  font-weight: bold;
+}
+
+.nav-button {
+  margin-left: 20%;
+  padding: 5px;
+}
+
+.nav-request {
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+  font-size: large;
+  color: white;
+  float: left;
+}
+
+.nav-property {
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+  font-size: large;
+  color: white;
+  float: left;
+}
+
+.nav-home {
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+  font-size: large;
+  color: white;
+  float: left;
+}

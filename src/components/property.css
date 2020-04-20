@@ -1,0 +1,41 @@
+.item-display {
+    display: inline-flex;
+    width: 250px;
+}
+
+.items-tab {
+    text-align: center;
+}
+
+.ant-card-bordered {
+    color: white;
+    border: 5px solid;
+}
+
+.pagination {
+    margin-top: 20px;
+    margin-bottom: 100px;
+}
+
+.filter-dropdown {
+    /*margin-left: 100px;*/
+}
+
+.search-bar{
+    width: 300px;
+}
+
+.ant-btn-primary {
+    color: #fff;
+    background-color: grey;
+    border-color: grey;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+}
+
+.page-head {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    justify-content: space-around;
+    align-items: center;
+}

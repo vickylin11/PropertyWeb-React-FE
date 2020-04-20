@@ -1,0 +1,19 @@
+.item-details {
+    margin-top: 80px;
+    display: flex;
+    padding-left: 10%;
+    color: grey;
+}
+
+img {
+    width: 25%;
+    height: 25%;
+    margin-right: 5%;
+}
+
+h1 {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    color: grey;
+    font-weight: 600;
+}
