@@ -1,0 +1,11 @@
+.ant-table table {
+    width: 90%;
+    padding-left: 10%;
+    border-radius: 2px 2px 0 0;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.pagination {
+    text-align: center;
+}

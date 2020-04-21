@@ -1,14 +1,14 @@
 import React from 'react';
-import Navigation from './components/navigation';
-import Home from './components/home';
-import Property from './components/property';
-import Request from './components/request';
-import PropertyDetail from './components/propertyDetail';
-import AddProperty from './components/addProperty';
-import Login from './components/login';
-import SignUp from './components/signup';
-import RequestDetail from './components/requestDetail';
-import AddRequest from './components/addRequest';
+import Navigation from './navigation';
+import Home from './home';
+import Property from '../property/property';
+import PropertyDetail from '../property/propertyDetail';
+import AddProperty from '../property/addProperty';
+import Login from '../user/login';
+import SignUp from '../user/signup';
+import Request from '../request/request';
+import RequestDetail from '../request/requestDetail';
+import AddRequest from '../request/addRequest';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
@@ -27,6 +27,7 @@ function App() {
             <Route path="/request" exact component={Request} />
             <Route path="/request/:id" component={RequestDetail} />
             <Route path="/add-request" component={AddRequest} />
+
           </Switch>
         </div>
       </Router>

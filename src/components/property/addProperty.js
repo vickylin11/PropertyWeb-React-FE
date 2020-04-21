@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Form, Input, InputNumber, Button, Radio, Upload, message } from 'antd';
+import { Form, Input, InputNumber, Button, Radio, Upload, message } from 'antd/lib/index';
 import { UploadOutlined } from '@ant-design/icons';
 import './addProperty.css';
 

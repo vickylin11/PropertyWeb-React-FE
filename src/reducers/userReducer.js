@@ -13,7 +13,7 @@ function updateUser(state, payload) {
 function getErrorMessage(state, payload) {
     return {
         ...state,
-        errorMessage: payload.message
+        errorMessage: payload
     };
 }
 
@@ -22,6 +22,10 @@ const userReducer = (state = initialState, action ) => {
         case 'SIGN_UP_SUCCESS':
             return updateUser(state, action.payload);
         case 'SIGN_UP_FAILURE':
+            return getErrorMessage(state, action.payload);
+        case 'LOGIN_SUCCESS':
+            return updateUser(state, action.payload.data);
+        case 'LOGIN_FAILURE':
             return getErrorMessage(state, action.payload);
         default:
             return state;

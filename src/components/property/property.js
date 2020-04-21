@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Card, Pagination, Menu, Dropdown, Input, Radio, Select, Button} from 'antd';
+import { Card, Pagination, Menu, Dropdown, Input, Radio, Select, Button} from 'antd/lib/index';
 import { PlusOutlined } from '@ant-design/icons';
 import './property.css';
 

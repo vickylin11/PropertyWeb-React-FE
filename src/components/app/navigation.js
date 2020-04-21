@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Button } from 'antd';
+import { Button } from 'antd/lib/index';
 import { HomeOutlined, CommentOutlined, ShopOutlined, UserOutlined } from '@ant-design/icons';
 import './navigation.css';
 
@@ -18,7 +18,6 @@ class Navigation extends Component {
 
     render() {
         const { user } = this.props;
-        console.log(user);
         return(
             <div>
                 <h2 className="logo">Best Home</h2>
@@ -36,7 +35,7 @@ class Navigation extends Component {
                                 <li>Property</li>
                             </div>
                         </Link>
-                        <Link to="/request">
+                        <Link to="/add-request">
                             <div className="nav-request">
                                 <CommentOutlined />
                                 <li>Request</li>
@@ -45,7 +44,7 @@ class Navigation extends Component {
                     </ul>
                     <div className="nav-button">
                         <UserOutlined />
-                        {user && user.type === "admin" && "admin"}
+                        {user && user.type === "admin" && "Admin"}
                         {user && user.type === "client" && user.lastName}
                         {user && user.login ?
                             <Button href={`/property`} onClick={this.handleLogOut}>Logout</Button> : <Button href={`/login`}>Login</Button>}

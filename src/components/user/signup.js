@@ -1,24 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Form, Input, Button, message } from 'antd';
+import { Form, Input, Button, message } from 'antd/lib/index';
+import '../app/app.css';
 
 class Signup extends Component {
     constructor(props) {
         super(props);
     }
 
-
-
     onFinish = values => {
-        const { signUp, errorMessage } = this.props;
-        signUp(values);
-
-        // if(errorMessage !==null) {
-        //     message.error(`Sign up failed. ${errorMessage}`);
-        // } else {
-        //     message.success("You have successfully signed up.");
-        //     setTimeout(() => {  this.props.history.push('/property'); }, 2000);
-        // }
+        const { signUp, history } = this.props;
+        signUp(
+            {user: values },
+            {history: history}
+            );
     };
 
     onFinishFailed = errorInfo => {
@@ -26,6 +21,7 @@ class Signup extends Component {
     };
 
     render() {
+        const { errorMessage } = this.props;
         const layout = {
             labelCol: {
                 span: 8,
@@ -42,10 +38,11 @@ class Signup extends Component {
         };
         return(
             <div>
-                <h1 style={{marginTop: '80px', textAlign: 'center'}}>Sign Up</h1>
+                {errorMessage && message.error(`Sign up failed. ${errorMessage}`)}
+                <h1 className="page-head">Sign Up</h1>
                 <Form
                     {...layout}
-                    name="basic"
+                    name="signup-form"
                     initialValues={{
                         remember: true,
                     }}
@@ -112,7 +109,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        signUp: (params) => dispatch({type: 'SIGN_UP', payload: params})
+        signUp: (params, meta) => dispatch({type: 'SIGN_UP', payload: params, meta})
     };
 };
 
