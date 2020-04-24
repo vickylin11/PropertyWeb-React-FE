@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Form, Input, Button, message } from 'antd/lib/index';
+import { Form, Input, Button, message, Alert } from 'antd/lib/index';
 import '../app/app.css';
 
 class Login extends Component {
@@ -14,7 +14,6 @@ class Login extends Component {
             {user: values },
             {history: history}
             );
-            // setTimeout(() => {  this.props.history.push('/property'); }, 2000);
     };
 
     onFinishFailed = errorInfo => {
@@ -39,7 +38,13 @@ class Login extends Component {
         };
         return(
             <div>
-                {errorMessage && message.error(`Login failed. ${errorMessage}`)}
+                {errorMessage && <Alert
+                    message="Error"
+                    description={errorMessage}
+                    type="error"
+                    showIcon
+                    closable
+                />}
                 <h1 className="page-head"> Login </h1>
                 <Form
                     {...layout}

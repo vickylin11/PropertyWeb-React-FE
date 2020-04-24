@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'antd/lib/index';
+import { Button, message } from 'antd/lib/index';
 import '../app/app.css';
 import './requestDetail.css';
 
@@ -18,6 +18,7 @@ class RequestDetail extends Component {
     handleButtonClick = () => {
         const { resolveRequest, currentRequest } = this.props;
         resolveRequest(currentRequest.id);
+        message.success("Request has been resolved.")
     };
 
     render() {
@@ -26,13 +27,14 @@ class RequestDetail extends Component {
             !currentRequest ? <h2> Loading... </h2> :
                 <div>
                     <h1 className="page-head"> Request Details </h1>
-                    <Button type="primary"
-                            onClick={this.handleButtonClick}
-                            disabled={user && user.type === "client"}
-                    >
-                        {currentRequest.resolved ? "Resolved" : "Pending"}
-                    </Button>
                     <div className="request-detail">
+                        <Button type="primary"
+                                onClick={this.handleButtonClick}
+                                disabled={user && user.type === "client"}
+                                className="status-button"
+                        >
+                            {currentRequest.resolved ? "Resolved" : "Pending"}
+                        </Button>
                         <h2> Request Title: {currentRequest.title} </h2>
                         <h2> Request Time: {currentRequest.createdAt} </h2>
                         <h2> Request Contents: {currentRequest.content}</h2>

@@ -67,16 +67,17 @@ export function* fetchPropertiesByTypeWatcher() {
 export function* addProperty({ payload }) {
     try{
         const newProperty = yield call([axios, axios.post], `${api}/property`, {
-                'name': payload.name,
-                'address': payload.address,
-                'type': payload.type,
-                'purpose': payload.purpose,
-                'price': payload.price,
+                'name': payload.property.name,
+                'address': payload.property.address,
+                'type': payload.property.type,
+                'purpose': payload.property.purpose,
+                'price': payload.property.price,
                 'image': "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
             });
         yield put({type: 'ADD_PROPERTY_SUCCESS', payload: newProperty.data});
-    } catch(error) {
-        yield put({type: 'ADD_PROPERTY_FAILURE', payload: error});
+        yield call(payload.history.push, '/property');
+    } catch(e) {
+        yield put({type: 'ADD_PROPERTY_FAILURE', payload: e.message });
     }
 }
 

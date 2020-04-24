@@ -10,19 +10,25 @@ class Property extends Component {
         super(props);
         this.state = {
             radioValue: "all",
-            dropdownValue: "House Type"
+            dropdownValue: "House Type",
+            searchText: null,
+            sorting: null
         };
     }
 
     componentDidMount() {
-        console.log(this.props.history);
         const { getPropertyList } = this.props;
         getPropertyList();
     }
 
     changePage = value => {
         const { getPropertyList } = this.props;
-        getPropertyList({page: value-1});
+        const { searchText, sorting } = this.state;
+        if (searchText || sorting) {
+            getPropertyList({page: value-1, key: searchText, sort: sorting});
+        } else {
+            getPropertyList({page: value-1});
+        }
     };
 
     handleMenuClick = e => {
@@ -33,19 +39,36 @@ class Property extends Component {
 
     handleSearch = value => {
         const { getPropertyList } = this.props;
+        this.setState({searchText: value});
         getPropertyList({key: value});
     };
 
     handleRadioChange = e => {
         const { getPropertyList } = this.props;
+        const { sorting } = this.state;
         const value = e.target.value;
-        value === "all" ? getPropertyList() : getPropertyList({key: value});
-        this.setState( { radioValue: value });
+        this.setState({searchText: null});
+        if(sorting) {
+            value === "all" ? getPropertyList({sort: sorting}) : getPropertyList({key: value, sort: sorting});
+        } else {
+            value === "all" ? getPropertyList() : getPropertyList({key: value});
+        }
+        this.setState( {
+            radioValue: value,
+            searchText: value
+        });
     };
 
     handlePriceChange = value => {
         const { getPropertyList } = this.props;
-        getPropertyList({sort: value});
+        const { searchText } = this.state;
+        searchText ? getPropertyList({sort: value, key: searchText})
+            : getPropertyList({sort: value});
+        this.setState({sorting: value});
+    };
+
+    handleAddButton = () => {
+        this.props.history.push('/add-property');
     };
 
     render() {
@@ -95,7 +118,7 @@ class Property extends Component {
                         <Radio value="rent">For Rent</Radio>
                         <Radio value="sale">For Sale</Radio>
                     </Radio.Group>
-                    <Button type="primary" icon={<PlusOutlined />} href={`add-property`}>
+                    <Button type="primary" icon={<PlusOutlined />} onClick={this.handleAddButton} >
                         Add Property
                     </Button>
                 </div>

@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Pagination, Table } from "antd";
+import {message, Pagination, Table} from "antd";
 import '../app/app.css';
 import './request.css';
 
 class Request extends Component {
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount() {
+        const { user, getAllRequests, getMyRequests } = this.props;
+        if(user && user.type === "admin") {
+            getAllRequests();
+        } else {
+            getMyRequests({userId: user.id});
+        }
     }
 
     changePage = value => {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Form, Input, Button, message } from 'antd/lib/index';
+import {Form, Input, Button, message, Alert} from 'antd/lib/index';
 import '../app/app.css';
 
 class Signup extends Component {
@@ -38,7 +38,13 @@ class Signup extends Component {
         };
         return(
             <div>
-                {errorMessage && message.error(`Sign up failed. ${errorMessage}`)}
+                {errorMessage && <Alert
+                    message="Error"
+                    description={errorMessage}
+                    type="error"
+                    showIcon
+                    closable
+                />}
                 <h1 className="page-head">Sign Up</h1>
                 <Form
                     {...layout}

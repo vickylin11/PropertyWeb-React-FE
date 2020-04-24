@@ -30,9 +30,11 @@ class AddProperty extends Component {
     };
 
     onFinish = values => {
-        const { addProperty } = this.props;
-        addProperty(values);
-        message.success('You have successfully added your property.');
+        const { addProperty, history } = this.props;
+        addProperty({
+            property: values,
+            history: history
+        });
     };
 
 

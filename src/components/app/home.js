@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import HomeImg from "../../resource/homeimg.jpg"
+
 
 class Home extends Component {
     render() {
         return(
             <div>
-                <h1> home page </h1>
+                <img src={HomeImg} alt="This is the home page" className="home-img"/>
             </div>
         );
     }

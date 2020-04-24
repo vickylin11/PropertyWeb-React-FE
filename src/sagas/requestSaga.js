@@ -6,11 +6,12 @@ const api = "http://localhost:8080";
 function* sendUserRequest({ payload }) {
     try {
         const newRequest = yield call([axios, axios.post], `${api}/request`, {
-            'title': payload.title,
-            'content': payload.content,
-            'userId': payload.userId
+            'title': payload.request.title,
+            'content': payload.request.content,
+            'userId': payload.request.userId
         });
         yield put({type: 'SEND_REQUEST_SUCCESS', payload: newRequest.data});
+        yield call(payload.history.push, '/request');
     } catch (e) {
         yield put({type: 'SEND_REQUEST_FAILURE', payload: e.response.data? e.response.data.message : e.message});
     }
@@ -57,7 +58,7 @@ function* fetchMyRequests({ payload }) {
 }
 
 function* getMyRequestsWatcher() {
-    yield takeLatest('GET_CLIENT_REQUESTS', fetchMyRequests);
+    yield takeLatest('GET_MY_REQUESTS', fetchMyRequests);
 }
 
 function* fetchRequestDetail({ payload }) {

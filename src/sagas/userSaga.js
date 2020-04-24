@@ -24,11 +24,9 @@ function* signUpWatcher() {
     yield takeLatest('SIGN_UP', signUp);
 }
 
-function* signOut(id) {
+function* signOut( { payload }) {
     try {
-        yield call([axios, axios.post], `${api}/user/logout`, {
-            'id': id
-        });
+        yield call([axios, axios.post], `${api}/user/logout/${payload}`);
         yield put({type: 'SIGN_OUT_SUCCESS'});
     } catch (e) {
         yield put({type: 'SIGN_OUT_FAILURE', payload: e});

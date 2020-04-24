@@ -17,7 +17,7 @@ class Navigation extends Component {
     };
 
     render() {
-        const { user } = this.props;
+        const { user, isLogin } = this.props;
         return(
             <div>
                 <h2 className="logo">Best Home</h2>
@@ -44,11 +44,11 @@ class Navigation extends Component {
                     </ul>
                     <div className="nav-button">
                         <UserOutlined />
-                        {user && user.type === "admin" && "Admin"}
-                        {user && user.type === "client" && user.lastName}
-                        {user && user.login ?
-                            <Button href={`/property`} onClick={this.handleLogOut}>Logout</Button> : <Button href={`/login`}>Login</Button>}
-                        <Button href={`/sign-up`}> Sign Up </Button>
+                        {user && user.type === "admin" && isLogin && "Admin"}
+                        {user && user.type === "client" && isLogin && user.lastName}
+                        { isLogin ?
+                            <Button onClick={this.handleLogOut}>Logout</Button> : <Button href={"/login"}>Login</Button>}
+                        <Button href={"/sign-up"}> Sign Up </Button>
                     </div>
                 </nav>
             </div>
@@ -58,7 +58,8 @@ class Navigation extends Component {
 
 const mapStateToProps = (state) => {
     return{
-        user: state.user.user
+        user: state.user.user,
+        isLogin: state.user.isLogin
     };
 };
 

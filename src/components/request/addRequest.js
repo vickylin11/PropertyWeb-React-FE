@@ -10,10 +10,13 @@ class AddRequest extends Component {
     }
 
     onFinish = values => {
-        const { sendRequest, user } = this.props;
+        const { sendRequest, user, history } = this.props;
         if(user && user.login) {
             values.userId = user.id;
-            sendRequest(values);
+            sendRequest({
+                request: values,
+                history: history
+            });
         } else {
             message.error("Please login in order to send request");
         }
@@ -21,15 +24,20 @@ class AddRequest extends Component {
 
     handleClick = () => {
         const { user, getAllRequests, getMyRequests, history } = this.props;
-       if(user && user.type === "admin") {
-           getAllRequests();
-           history.push("./request");
-       } else if(user && user.type === "client") {
-           getMyRequests({userId: user.id});
-           history.push("./request");
-       } else {
-           message.error("Please login in order to view requests");
-       }
+       // if(user && user.type === "admin") {
+        //        //     getAllRequests();
+        //        //     history.push("./request");
+        //        // } else if(user && user.type === "client") {
+        //        //     getMyRequests({userId: user.id});
+        //        //     history.push("./request");
+        //        // } else {
+        //        //     message.error("Please login in order to view requests");
+        //        // }
+        if(user) {
+            history.push("./request");
+        } else {
+            message.error("Please login in order to view requests");
+        }
     };
 
     render() {

@@ -27,7 +27,6 @@ function App() {
             <Route path="/request" exact component={Request} />
             <Route path="/request/:id" component={RequestDetail} />
             <Route path="/add-request" component={AddRequest} />
-
           </Switch>
         </div>
       </Router>
