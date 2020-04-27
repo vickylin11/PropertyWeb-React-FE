@@ -129,7 +129,7 @@ class Property extends Component {
                                 <Card
                                     hoverable
                                     style={{ width: 250 }}
-                                    cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+                                    cover={<img alt="example" src={property.image} />}
                                 >
                                     <Meta title={property.name} description={"$" + property.price} />
                                 </Card>

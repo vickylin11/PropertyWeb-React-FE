@@ -7,9 +7,6 @@ import './navigation.css';
 
 
 class Navigation extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     handleLogOut = () => {
         const { signOut, user } = this.props;

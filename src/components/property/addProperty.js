@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {storage} from "../../config/firebase";
 import { Form, Input, InputNumber, Button, Radio, Upload, message } from 'antd/lib/index';
 import { UploadOutlined } from '@ant-design/icons';
 import './addProperty.css';
@@ -7,21 +8,12 @@ import './addProperty.css';
 class AddProperty extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            imageUrl: null
+        };
     }
 
-    validateMessages = {
-        required: '${label} is required!',
-        types: {
-            number: '${label} is not a validate number!',
-        },
-        number: {
-            range: '${label} must be not less than ${min}',
-        },
-    };
-
     normFile = e => {
-        console.log('Upload event:', e);
-
         if (Array.isArray(e)) {
             return e;
         }
@@ -31,12 +23,47 @@ class AddProperty extends Component {
 
     onFinish = values => {
         const { addProperty, history } = this.props;
-        addProperty({
-            property: values,
-            history: history
-        });
+        const { imageUrl } = this.state;
+        if(imageUrl) {
+            values.image = imageUrl;
+            addProperty({
+                property: values,
+                history: history
+            });
+        } else {
+            message.error("Image is still uploading");
+        }
     };
 
+    beforeUpload = (file) => {
+        const isJPGorPNG = file.type === 'image/jpeg' || file.type === 'image/png';
+        if (!isJPGorPNG) {
+            message.error('You can only upload JPG and PNG file!');
+        }
+        const isLt5M = file.size / 1024 / 1024 < 5;
+        if (!isLt5M) {
+            message.error('Image must smaller than 5MB!');
+        }
+        return isJPGorPNG && isLt5M;
+    };
+
+
+    customRequest = ({file}) => {
+        console.log(file);
+        const uploadTask = storage.ref(`images/${file.name}`).put(file);
+        uploadTask.on('state_changed',
+            (snapshot) => {
+                console.log(snapshot);
+            },
+            (error) => {
+                console.log(error);
+                },
+            () => {
+                storage.ref('images').child(file.name).getDownloadURL().then(url => {
+                    this.setState({imageUrl: url});
+            })
+            });
+    };
 
     render() {
         const layout = {
@@ -48,10 +75,20 @@ class AddProperty extends Component {
             },
         };
 
+        const validateMessages = {
+            required: '${label} is required!',
+            types: {
+                number: '${label} is not a validate number!'
+            },
+            number: {
+                range: '${label} must be not less than ${min}'
+            },
+        };
+
         return(
             <div>
                 <h1 className='header'> Add Property </h1>
-                <Form {...layout} name="nest-messages" onFinish={values => this.onFinish(values)} validateMessages={this.validateMessages}>
+                <Form {...layout} name="nest-messages" onFinish={values => this.onFinish(values)} validateMessages={validateMessages}>
                     <Form.Item name="name" label="Name"
                         rules={[
                             {
@@ -113,10 +150,15 @@ class AddProperty extends Component {
                         getValueFromEvent={this.normFile}
                         extra="Please upload your property image."
                     >
-                        <Upload name="logo" action="/upload.do" listType="picture">
+                        <Upload listType="picture"
+                                beforeUpload={this.beforeUpload}
+                                customRequest={this.customRequest}
+                                showUploadList={false}
+                        >
                             <Button>
                                 <UploadOutlined /> Click to upload
                             </Button>
+                            <img src={this.state.imageUrl} className="image-display" />
                         </Upload>
                     </Form.Item>
                     <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>

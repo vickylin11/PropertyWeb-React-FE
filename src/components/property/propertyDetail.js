@@ -3,9 +3,6 @@ import { connect } from 'react-redux';
 import './propertyDetail.css';
 
 class PropertyDetail extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     componentDidMount() {
         const { getPropertyDetails } = this.props;
@@ -21,7 +18,7 @@ class PropertyDetail extends Component {
             propertyDetails === null ?
                 <h2>loading ... </h2> :
                 <div className='item-details'>
-                    <img src= {propertyDetails.image} alt="Property Image" />
+                    <img src= {propertyDetails.image} alt="Property Images" />
                     <div>
                         <h1> {propertyDetails.name} </h1>
                         <h2> {propertyDetails.purpose} </h2>

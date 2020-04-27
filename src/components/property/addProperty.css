@@ -26,3 +26,16 @@
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+.ant-upload-list-picture .ant-upload-list-item, .ant-upload-list-picture-card .ant-upload-list-item {
+    position: relative;
+    height: 66px;
+    padding: 8px;
+    width: 50%;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+}
+
+.ant-upload-list-picture .ant-upload-list-item-error, .ant-upload-list-picture-card .ant-upload-list-item-error {
+    border-color: #ff4d4f;
+}

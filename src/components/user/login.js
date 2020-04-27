@@ -4,9 +4,6 @@ import { Form, Input, Button, message, Alert } from 'antd/lib/index';
 import '../app/app.css';
 
 class Login extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     onFinish = values => {
         const { login, history} = this.props;

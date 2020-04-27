@@ -72,7 +72,7 @@ export function* addProperty({ payload }) {
                 'type': payload.property.type,
                 'purpose': payload.property.purpose,
                 'price': payload.property.price,
-                'image': "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                'image': payload.property.image
             });
         yield put({type: 'ADD_PROPERTY_SUCCESS', payload: newProperty.data});
         yield call(payload.history.push, '/property');

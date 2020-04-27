@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {message, Pagination, Table} from "antd";
+import { Pagination, Table } from "antd";
 import '../app/app.css';
 import './request.css';
 
 class Request extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     componentDidMount() {
         const { user, getAllRequests, getMyRequests } = this.props;
