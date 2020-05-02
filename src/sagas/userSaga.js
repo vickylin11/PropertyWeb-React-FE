@@ -1,8 +1,7 @@
 import { call, put, takeEvery, fork, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
-const api = "http://localhost:8080";
-
+const api = process.env.REACT_APP_API;
 
 function* signUp({ payload, meta }) {
     try {
